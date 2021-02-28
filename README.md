@@ -13,7 +13,7 @@ npm install heax
 - From cdn
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/coderosh/heaxjs/dist/bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/coderosh/heaxjs@1.0.0/dist/bundle.js"></script>
 ```
 
 ## Usage

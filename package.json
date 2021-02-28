@@ -1,6 +1,6 @@
 {
   "name": "heax",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple verlet physics engine written in javascript.",
   "main": "src/index.js",
   "scripts": {
