@@ -85,7 +85,7 @@ box.sticks[0].hidden = true;
 square.points[2].pinned = true;
 ```
 
-4. Update and paint the heax instance
+4. Update and paint using heax instance
 
 ```js
 function update() {
@@ -101,4 +101,4 @@ function update() {
 update();
 ```
 
-5. Save and refresh your browser. For complete api documentation visit [coderosh.github.io/heaxjs/docs](https://coderosh.github.io/heaxjs/docs)
+5. Save and refresh your browser. For complete api documentation visit [coderosh.github.io/heaxjs](https://coderosh.github.io/heaxjs/)
