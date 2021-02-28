@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      canvas {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas></canvas>
+    <script src="../dist/bundle.js"></script>
+
+    <script>
+      const canvas = document.querySelector("canvas");
+      canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth;
+      const heax = new window.Heax();
+
+      heax.box(20, 10, 50, 120);
+
+      heax.tire(20, 60, 40, 6);
+
+      heax.tire(200, 120, 40, 8, 2, 2);
+
+      let rope = heax.rope((i) => ({ x: 10 + i * 10, y: 10 + 1 }), 20);
+      rope.hidePoints();
+      rope.points[0].pinned = true;
+      rope.points[0].hidden = false;
+      rope.points[rope.points.length - 1].pinned = true;
+      rope.points[rope.points.length - 1].hidden = false;
+      const middle = rope.points[Math.min(rope.points.length / 2)];
+      middle.hidden = false;
+
+      const triangle = heax.tire(10, 20, 30, 3);
+
+      rope.addStick(middle, triangle.points[0]);
+
+      for (const c of heax.composites) {
+        for (const p of c.points) {
+          p.color = "#1f52f5";
+          p.radius = 4;
+        }
+        for (const a of c.sticks) {
+          a.color = "#1f52f5";
+        }
+      }
+
+      function update() {
+        heax.clear();
+        heax.update();
+        heax.render();
+        heax.mouse.drag();
+
+        requestAnimationFrame(update);
+      }
+
+      update();
+    </script>
+  </body>
+</html>

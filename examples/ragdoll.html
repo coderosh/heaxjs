@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      canvas {
+        display: block;
+        background: white;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.7/dat.gui.min.js"></script>
+    <script src="../dist/bundle.js"></script>
+    <script>
+      const canvas = document.querySelector("canvas");
+      canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth;
+      const heax = new window.Heax();
+
+      const ragdoll = new window.Composite(heax);
+
+      // head
+      const head = ragdoll.addPoint(50, 0, 50, 0, { radius: 15 });
+
+      // neck
+      const neck = ragdoll.addPoint(50, 40, 50, 40, { radius: 2 });
+      ragdoll.addStick(head, neck, { width: 4 });
+
+      // body
+      const body = ragdoll.addPoint(50, 120, 50, 120, { radius: 2 });
+      ragdoll.addStick(neck, body, { width: 4 });
+
+      // hands
+      const leftElbow = ragdoll.addPoint(20, 70, 20, 70, { radius: 2 });
+      ragdoll.addStick(neck, leftElbow, { width: 4 });
+      const leftHand = ragdoll.addPoint(20, 120, 20, 120, { radius: 2 });
+      ragdoll.addStick(leftElbow, leftHand, { width: 4 });
+
+      const rightElbow = ragdoll.addPoint(80, 70, 80, 70, { radius: 2 });
+      ragdoll.addStick(neck, rightElbow, { width: 4 });
+      const rightHand = ragdoll.addPoint(80, 120, 80, 120, { radius: 2 });
+      ragdoll.addStick(rightElbow, rightHand, { width: 4 });
+
+      //legs
+      const leftKnee = ragdoll.addPoint(20, 150, 20, 150, { radius: 2 });
+      ragdoll.addStick(body, leftKnee, { width: 4 });
+      const leftLeg = ragdoll.addPoint(20, 200, 20, 200, { radius: 2 });
+      ragdoll.addStick(leftKnee, leftLeg, { width: 4 });
+
+      const rightKnee = ragdoll.addPoint(80, 150, 80, 150, { radius: 2 });
+      ragdoll.addStick(body, rightKnee, { width: 4 });
+      const rightLeg = ragdoll.addPoint(80, 200, 80, 200, { radius: 2 });
+      ragdoll.addStick(rightKnee, rightLeg, { width: 4 });
+
+      const joints = [
+        ragdoll.addStick(leftElbow, body, { hidden: true }),
+        ragdoll.addStick(rightElbow, body, { hidden: true }),
+        ragdoll.addStick(leftElbow, rightElbow, { hidden: true }),
+
+        ragdoll.addStick(head, leftElbow, { hidden: true }),
+        ragdoll.addStick(head, rightElbow, { hidden: true }),
+
+        ragdoll.addStick(leftKnee, rightKnee, { hidden: true }),
+        ragdoll.addStick(leftKnee, neck, { hidden: true }),
+        ragdoll.addStick(rightKnee, neck, { hidden: true }),
+
+        ragdoll.addStick(leftLeg, body, { hidden: true }),
+        ragdoll.addStick(rightLeg, body, { hidden: true }),
+        ragdoll.addStick(leftLeg, neck, { hidden: true }),
+        ragdoll.addStick(rightLeg, neck, { hidden: true }),
+      ];
+
+      const gui = new dat.GUI();
+      const stiffness = gui.add({ stiffness: 1.0 }, "stiffness", 0, 1.5);
+      const showJoints = gui.add({ showJoints: false }, "showJoints");
+
+      stiffness.onChange((val) => {
+        for (const s of joints) {
+          s.stiffness = val;
+        }
+      });
+
+      showJoints.onChange((val) => {
+        for (const s of joints) {
+          s.hidden = !val;
+        }
+      });
+
+      heax.composites.push(ragdoll);
+      function update() {
+        heax.clear();
+        heax.update();
+        heax.render();
+        heax.mouse.drag();
+
+        requestAnimationFrame(update);
+      }
+
+      update();
+    </script>
+  </body>
+</html>
