@@ -53,7 +53,7 @@ heax.composites.push(square);
 ## Using cdn
 
 ```html
-<script src="https://unpkg.com/heax@2.0.0/dist/index.umd.js"></script>
+<script src="https://unpkg.com/heax"></script>
 
 <script>
   const { Heax, Composite, Particle } = HeaxVerlet;
