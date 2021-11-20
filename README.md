@@ -49,3 +49,13 @@ heax.composites.push(square);
 ```
 
 > For complete api documentation visit [https://coderosh.github.io/heaxjs](https://coderosh.github.io/heaxjs)
+
+## Using cdn
+
+```html
+<script src="https://unpkg.com/heax@2.0.0/dist/index.umd.js"></script>
+
+<script>
+  const { Heax, Composite, Particle } = HeaxVerlet;
+</script>
+```
