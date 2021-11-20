@@ -1,6 +1,6 @@
 {
   "name": "heax",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Simple verlet physics engine written in javascript.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -14,7 +14,8 @@
     "build:doc": "typedoc",
     "build:js": "rollup -c",
     "build": "node scripts/build.js",
-    "deploy": "gh-pages -d docs -t true"
+    "deploy": "gh-pages -d docs -t true",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",

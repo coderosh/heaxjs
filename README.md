@@ -59,3 +59,7 @@ heax.composites.push(square);
   const { Heax, Composite, Particle } = HeaxVerlet;
 </script>
 ```
+
+### License
+
+MIT
