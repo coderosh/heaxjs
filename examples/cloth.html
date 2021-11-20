@@ -20,19 +20,22 @@
   </head>
   <body>
     <canvas></canvas>
-    <script src="../dist/bundle.js"></script>
+    <script src="../index.umd.js"></script>
     <script>
+      const { Heax } = HeaxVerlet;
+
       const canvas = document.querySelector("canvas");
       canvas.height = window.innerHeight;
       canvas.width = window.innerWidth;
-      const heax = new window.Heax();
-      const cloth = heax.cloth(new Vector(50, 0), 250, 200, 36, 7);
-      cloth.hidePoints();
+
+      const heax = new Heax();
+      const cloth = heax.createCloth(50, 0, 250, 200, 36, 7);
+      cloth.hideParticles();
       cloth.iterations = 15;
 
       for (const c of heax.composites) {
-        for (const stick of c.sticks) {
-          stick.color = "#001628";
+        for (const constraint of c.constraints) {
+          constraint.color = "#001628";
         }
       }
 

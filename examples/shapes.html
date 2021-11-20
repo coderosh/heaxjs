@@ -19,39 +19,37 @@
   </head>
   <body>
     <canvas></canvas>
-    <script src="../dist/bundle.js"></script>
+    <script src="../index.umd.js"></script>
 
     <script>
+      const { Heax } = HeaxVerlet;
+
       const canvas = document.querySelector("canvas");
       canvas.height = window.innerHeight;
       canvas.width = window.innerWidth;
-      const heax = new window.Heax();
 
-      heax.box(20, 10, 50, 120);
+      const heax = new Heax();
+      heax.createRectangle(20, 10, 50, 120);
 
-      heax.tire(20, 60, 40, 6);
-
-      heax.tire(200, 120, 40, 8, 2, 2);
-
-      let rope = heax.rope((i) => ({ x: 10 + i * 10, y: 10 + 1 }), 20);
-      rope.hidePoints();
-      rope.points[0].pinned = true;
-      rope.points[0].hidden = false;
-      rope.points[rope.points.length - 1].pinned = true;
-      rope.points[rope.points.length - 1].hidden = false;
-      const middle = rope.points[Math.min(rope.points.length / 2)];
+      let rope = heax.createRope((i) => ({ x: 10 + i * 10, y: 10 + 1 }), 20);
+      rope.hideParticles();
+      rope.particles[0].pinned = true;
+      rope.particles[0].hidden = false;
+      rope.particles[rope.particles.length - 1].pinned = true;
+      rope.particles[rope.particles.length - 1].hidden = false;
+      const middle = rope.particles[Math.min(rope.particles.length / 2)];
       middle.hidden = false;
 
-      const triangle = heax.tire(10, 20, 30, 3);
+      const sqr = heax.createRectangle(10, 10, 100, 100);
 
-      rope.addStick(middle, triangle.points[0]);
+      rope.addConstraint(middle, sqr.particles[0]);
 
       for (const c of heax.composites) {
-        for (const p of c.points) {
+        for (const p of c.particles) {
           p.color = "#1f52f5";
           p.radius = 4;
         }
-        for (const a of c.sticks) {
+        for (const a of c.constraints) {
           a.color = "#1f52f5";
         }
       }
