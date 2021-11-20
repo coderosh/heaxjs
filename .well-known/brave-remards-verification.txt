@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: heax.js.org
+Token: 8299fab99e4f14da14eb8b7dc0c1baa5109130c2ad633896e13a99b202ef8d7d
