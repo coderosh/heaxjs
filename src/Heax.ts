@@ -89,6 +89,7 @@ class Heax {
     rect.addConstraint(0, 2, constraintInfo);
 
     this.composites.push(rect);
+    return rect;
   }
 
   /**
