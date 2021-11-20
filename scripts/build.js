@@ -1,6 +1,5 @@
-import cpy from "cpy";
 import path from "path";
-import fs from "fs/promises";
+import fs from "fs-extra";
 import { execa } from "execa";
 
 async function main() {
@@ -11,11 +10,11 @@ async function main() {
     execa("npm", ["run", "build:doc"], { stdio: "inherit" }),
   ]);
 
-  await cpy("examples/*.html", path.join("docs", "examples"));
+  await fs.copy("static", "docs", { recursive: true });
+  await fs.copy("examples", path.join("docs", "examples"), { recursive: true });
+  await fs.copy("dist/index.umd.js", "docs/index.umd.js");
 
-  await cpy("dist/index.umd.js", "docs");
-
-  fs.writeFile(path.join("docs", "CNAME"), "heax.js.org");
+  console.log(">> Completed");
 }
 
 main();

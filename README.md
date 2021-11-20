@@ -10,7 +10,7 @@ npm install heax
 
 ## Usage
 
-Examples: [https://coderosh.github.io/heaxjs/examples](https://coderosh.github.io/heaxjs/examples)
+Examples: [https://heax.js.org/examples](https://heax.js.org/examples)
 
 ```js
 import { Heax, Composite } from "heax";
@@ -39,16 +39,16 @@ square.addConstraint(0, 3);
 heax.composites.push(square);
 
 (function update() {
+  heax.clear();
   heax.update();
   heax.render();
   heax.mouse.drag();
-  heax.clear();
 
   requireAnimationFrame(update);
 })();
 ```
 
-> For complete api documentation visit [https://coderosh.github.io/heaxjs](https://coderosh.github.io/heaxjs)
+> For complete api documentation visit [https://heax.js.org](https://heax.js.org)
 
 ## Using cdn
 

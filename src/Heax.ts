@@ -139,6 +139,11 @@ class Heax {
    * @param offset Pin offset
    * @param particleInfo Particle info
    * @param constraintInfo Constraint info
+   *
+   * @example
+   * ```js
+   * const cloth = heax.createCloth(0, 0, 250, 250, 9, 2, { color: "red" }, { width: 5 })
+   * ```
    */
   createCloth(
     x = 0,
