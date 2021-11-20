@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Heax Js</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 900px;
+        margin: auto;
+      }
+
+      iframe {
+        width: 100%;
+        border: 5px solid #001628;
+        height: 400px;
+        background: white;
+      }
+
+      .links {
+        padding: 0;
+        overflow-x: auto;
+      }
+
+      .links a {
+        text-decoration: none;
+        color: white;
+        font-weight: 600;
+        display: inline-block;
+        text-transform: uppercase;
+        padding: 4px 10px;
+        border-radius: 2px;
+        background: #001628;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <ul class="links">
+        <a href="#cloth">Cloth</a>
+        <a href="#shapes">Shapes</a>
+        <a href="#ragdoll">Ragdoll</a>
+      </ul>
+      <iframe frameborder="0"></iframe>
+    </div>
+
+    <script>
+      const allExamples = ["cloth", "shapes", "ragdoll"];
+      const iframe = document.querySelector("iframe");
+      window.addEventListener("hashchange", displayPage);
+
+      function displayPage() {
+        let file = window.location.hash.replace("#", "");
+        if (allExamples.indexOf(file) === -1) {
+          file = allExamples[0];
+        }
+        const src = "./" + file + ".html";
+        iframe.setAttribute("src", src);
+      }
+
+      displayPage();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      canvas {
+        display: block;
+        background: white;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas></canvas>
+    <script src="../index.umd.js"></script>
+    <script>
+      const { Heax } = HeaxVerlet;
+
+      const canvas = document.querySelector("canvas");
+      canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth;
+
+      const heax = new Heax();
+      const cloth = heax.createCloth(50, 0, 250, 200, 36, 7);
+      cloth.hideParticles();
+      cloth.iterations = 15;
+
+      for (const c of heax.composites) {
+        for (const constraint of c.constraints) {
+          constraint.color = "#001628";
+        }
+      }
+
+      function update() {
+        heax.clear();
+        heax.update();
+        heax.render();
+        heax.mouse.drag();
+        cloth.tear(250);
+
+        requestAnimationFrame(update);
+      }
+
+      update();
+    </script>
+  </body>
+</html>
